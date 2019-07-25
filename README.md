@@ -18,4 +18,4 @@ clone it and run
 
  !['难度升级'](https://github.com/zyq666/Tetris/blob/master/static/upLevel.png?raw=true, '难度升级')
  
- !['游戏结束'](https://github.com/zyq666/Tetris/blob/master/static/upLevel.png?raw=true, '游戏结束')
+ !['游戏结束'](https://github.com/zyq666/Tetris/blob/master/static/gameOver.png?raw=true, '游戏结束')
