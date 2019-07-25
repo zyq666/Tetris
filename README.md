@@ -14,8 +14,8 @@ clone it and run
  
  now you can run it!
  
- !['游戏中']('https://github.com/zyq666/Tetris/blob/master/static/playing.png?raw=true', '游戏中')
+ !['游戏中'](https://github.com/zyq666/Tetris/blob/master/static/playing.png?raw=true, 游戏中)
 
- !['难度升级']('https://github.com/zyq666/Tetris/blob/master/static/upLevel.png?raw=true', '难度升级')
+ !['难度升级'](https://github.com/zyq666/Tetris/blob/master/static/upLevel.png?raw=true, 难度升级)
  
- !['游戏结束']('https://github.com/zyq666/Tetris/blob/master/static/upLevel.png?raw=true', '游戏结束')
+ !['游戏结束'](https://github.com/zyq666/Tetris/blob/master/static/upLevel.png?raw=true, 游戏结束)
