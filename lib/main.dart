@@ -2,12 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:tetris/blocs/gamePanelBloc.dart';
-import 'package:tetris/components/animations.dart';
-import 'package:tetris/components/animations.dart' as prefix0;
 import 'package:tetris/components/gamePanel.dart';
 import 'package:tetris/components/scoreBar.dart';
 import 'package:tetris/components/tool.dart';
-import 'package:tetris/test.dart';
 import 'blocs/blocBase.dart';
 
 void main() => runApp(Tetris());

@@ -12,7 +12,6 @@ class ScoreBarState extends State<ScoreBar> with TickerProviderStateMixin{
 
   TextStyle basicTextStyle = TextStyle(color: Colors.white, fontSize: 18, decoration: TextDecoration.none);
   int _score = 0;
-  int _addScore = 0;
 
   AnimationController _scoreTweenController;
   Animation<double> _scoreTween;

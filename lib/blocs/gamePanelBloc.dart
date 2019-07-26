@@ -71,11 +71,6 @@ class GamePanelBloc implements BlocBase {
   GamePanelBloc(int rows, int columns) {
     // 设置音乐
     _audioPlayer.play(musicUrl['bgm']);
-    _audioPlayerStateSubscription = _audioPlayer.onPlayerStateChanged.listen((s) {
-      if (s == AudioPlayerState.STOPPED) {
-        print('jiehsule');
-      }
-    });
     // _audioPlayer.setReleaseMode(ReleaseMode.LOOP);
 
     // 初始化关卡行列数
@@ -175,11 +170,11 @@ class GamePanelBloc implements BlocBase {
       'x': (4-nextSquare.length)~/2,
       'y': (4-nextSquare[0].length)~/2
     };
-    nextSquare.asMap().keys.forEach((row) {
-      nextSquare[row].asMap().keys.forEach((column) {
+    for(int row = 0; row < nextSquare.length; row++) {
+      for(int column = 0; column < nextSquare[row].length; column++) {
         _nextSquare[row + nextOrigin['x']][column + nextOrigin['y']] = nextSquare[row][column];
-      });
-    });
+      }
+    }
     _changeSquareSink.add(_nextSquare);
   }
 
@@ -187,12 +182,12 @@ class GamePanelBloc implements BlocBase {
   bool _isCanTransform (List<List<int>> squares) {
     List<bool> canTransform = List<bool>.filled(squares.length * squares[0].length, false);
     int index = 0;
-    squares.asMap().keys.forEach((row) {
-      squares[row].asMap().keys.forEach((column) {
+    for(int row = 0; row < squares.length; row++) {
+      for (int column = 0; column < squares[row].length; column++) {
         canTransform[index] = _currentPosition['x'] + row < _rows && _currentPosition['y'] + column < _columns && _gridList[_currentPosition['x'] + row][_currentPosition['y']+column] != 2;
         index++;
-      });
-    });
+      }
+    }
     return canTransform.every((result) => result);
   } 
 
@@ -205,10 +200,10 @@ class GamePanelBloc implements BlocBase {
     });
     List<int> fullRow = [];
     int allEmptyRow;
-    newList.asMap().keys.forEach((row) {
+    for(int row = 0; row < newList.length; row++) {
       if (newList[row].every((value) => value == 2)) fullRow.add(row);
-      if (newList[row].every((value) => value == 0)) allEmptyRow = row;
-    });
+      if (newList[row].every((value) => value == 0)) allEmptyRow = row; 
+    }
     if (null != fullRow && fullRow.length > 0) {
       fullRow.forEach((full) {
         for(int moveRow = full; moveRow > allEmptyRow; moveRow--) {
@@ -229,7 +224,6 @@ class GamePanelBloc implements BlocBase {
         }
         _handleChangeScore();
       });
-      
     }
   }
   
@@ -255,14 +249,16 @@ class GamePanelBloc implements BlocBase {
     }
     _currentSquareRows = _currentSquare.length;
     _currentSquareColumns = _currentSquare[0].length;
-    _currentSquare.asMap().keys.forEach((row) {
-      _currentSquare[row].asMap().keys.forEach((column) {
+
+    for(int row = 0; row < _currentSquare.length; row++) {
+      for(int column = 0; column < _currentSquare[row].length; column++) {
         if (_gridList[_panelOrigin['x'] + column][_panelOrigin['y'] + row] == 2) {
           _gameOver = true;
           _changeCheckoutPoint.add(null);
         }
-      });
-    });
+      }
+    }
+
     if (_gameOver) {
       _audioPlayer.stop();
       AudioPlayer _gameOverPlayer = AudioPlayer();
@@ -312,7 +308,7 @@ class GamePanelBloc implements BlocBase {
   bool _isCanMove (String direction, Map<String, int> position) {
     List<int> lastOne = _squareBottomEmpty(direction, position);
     List<bool> allCanMove = List<bool>.filled(lastOne.length, false);
-    lastOne.asMap().keys.forEach((column) {
+    for(int column = 0; column < lastOne.length; column++) {
       switch (direction) {
         case 'down':
           allCanMove[column] = position['y'] + lastOne[column] + 2 > _columns ? false : _gridList[position['x']+column][position['y'] + lastOne[column] + 1] == 0;
@@ -338,7 +334,7 @@ class GamePanelBloc implements BlocBase {
           }
           allCanMove[column] =  position['x'] + firstColumn < _rows && _gridList[position['x'] + firstColumn][position['y'] + column] == 0;
       }
-    });
+    }
     return allCanMove.every((result) => result == true);
   }
 
@@ -355,12 +351,12 @@ class GamePanelBloc implements BlocBase {
 
   // 将已经落地的方块的值置为2
   void _hadDownFall (Map<String, int> position) {
-    _currentSquare.asMap().keys.forEach((row) {
-      _currentSquare[row].asMap().keys.forEach((column) {
+    for(int row = 0; row < _currentSquare.length; row++) {
+      for( int column = 0; column < _currentSquare[row].length; column++) {
         if (_gridList[position['x'] + row][position['y'] + column] == 1)
           _gridList[position['x'] + row][position['y'] + column] = 2;
-      });
-    });
+      }
+    }
   }
 
   // 重新渲染布局
